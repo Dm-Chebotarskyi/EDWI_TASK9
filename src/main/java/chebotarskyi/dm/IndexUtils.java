@@ -34,10 +34,14 @@ public class IndexUtils {
     }
 
     public void addDoc(String title, String url, double price) throws IOException {
+
+        if (!Deduplicator.isOk(title))
+            return;
+
         Document doc = new Document();
         doc.add(new TextField("title", title, Field.Store.YES));
         doc.add(new StringField("url", url, Field.Store.YES));
-        doc.add(new StoredField("price", price));
+        doc.add(new StringField("price", String.valueOf(price), Field.Store.YES));
         w.get().addDocument(doc);
     }
 

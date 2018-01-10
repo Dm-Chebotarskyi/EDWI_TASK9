@@ -1,9 +1,10 @@
-/home/dima/IdeaProjects/EDWI_TASK9/src/main/java/chebotarskyi/dm/http/TextProcessingService.java
 /home/dima/IdeaProjects/EDWI_TASK9/src/main/java/chebotarskyi/dm/MainGUI.java
 /home/dima/IdeaProjects/EDWI_TASK9/src/main/java/chebotarskyi/dm/LinkProcessor.java
 /home/dima/IdeaProjects/EDWI_TASK9/src/main/java/chebotarskyi/dm/NotFoundException.java
 /home/dima/IdeaProjects/EDWI_TASK9/src/main/java/chebotarskyi/dm/Validator.java
 /home/dima/IdeaProjects/EDWI_TASK9/src/main/java/chebotarskyi/dm/IndexUtils.java
-/home/dima/IdeaProjects/EDWI_TASK9/src/main/java/chebotarskyi/dm/http/model/TextProcessingServiceResponse.java
-/home/dima/IdeaProjects/EDWI_TASK9/src/main/java/chebotarskyi/dm/http/model/TextProcessingProbability.java
+/home/dima/IdeaProjects/EDWI_TASK9/src/main/java/chebotarskyi/dm/page/analyzer/tool/AnalyzerResult.java
+/home/dima/IdeaProjects/EDWI_TASK9/src/main/java/chebotarskyi/dm/page/analyzer/tool/EuroPageAnalyzer.java
+/home/dima/IdeaProjects/EDWI_TASK9/src/main/java/chebotarskyi/dm/page/analyzer/tool/PageAnalyzerStrategy.java
+/home/dima/IdeaProjects/EDWI_TASK9/src/main/java/chebotarskyi/dm/page/analyzer/tool/PageAnalyzer.java
 /home/dima/IdeaProjects/EDWI_TASK9/src/main/java/chebotarskyi/dm/QueryProcessor.java

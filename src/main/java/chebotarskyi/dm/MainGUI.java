@@ -56,8 +56,8 @@ public class MainGUI {
 
         IndexUtils indexUtils = new IndexUtils();
 
-        LinkProcessor linkProcessor = new LinkProcessor(count, indexUtils);
-        linkProcessor.startProcessing(url);
+        LinkProcessor linkProcessor = new LinkProcessor(url, indexUtils, count);
+        linkProcessor.startProcessing();
 
         indexUtils.closeWriter();
 
