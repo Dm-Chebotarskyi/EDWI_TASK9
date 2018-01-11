@@ -1,5 +1,6 @@
 package chebotarskyi.dm;
 
+import chebotarskyi.dm.exception.NotSupportedShopException;
 import chebotarskyi.dm.page.analyzer.tool.AnalyzerResult;
 import chebotarskyi.dm.page.analyzer.tool.PageAnalyzerStrategy;
 import com.google.common.collect.ImmutableSet;
@@ -26,7 +27,7 @@ public class LinkProcessor {
     private final PageAnalyzerStrategy analyzerStrategy;
     private final int threshold;
 
-    public LinkProcessor(String url, IndexUtils indexUtils, int threshold) {
+    public LinkProcessor(String url, IndexUtils indexUtils, int threshold) throws NotSupportedShopException {
         this.url = url;
         this.indexUtils = indexUtils;
         this.threshold = threshold;
@@ -96,7 +97,7 @@ public class LinkProcessor {
                 List<AnalyzerResult> results = analyzerStrategy.analyze(body);
 
                 for (AnalyzerResult result : results) {
-                    indexUtils.addDoc(result.title(), result.url(), result.price());
+                    indexUtils.addDoc(result.title(), result.url(), result.price(), result.availibility());
                 }
                 Set<String> innerLinks = getLinksFrom(body);
                 Set<String> links = new TreeSet<>();

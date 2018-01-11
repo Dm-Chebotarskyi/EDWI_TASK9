@@ -1,5 +1,7 @@
 package chebotarskyi.dm;
 
+import chebotarskyi.dm.exception.NotFoundException;
+import chebotarskyi.dm.exception.NotSupportedShopException;
 import org.apache.lucene.queryparser.classic.ParseException;
 
 import javax.swing.*;
@@ -56,12 +58,16 @@ public class MainGUI {
 
         IndexUtils indexUtils = new IndexUtils();
 
-        LinkProcessor linkProcessor = new LinkProcessor(url, indexUtils, count);
-        linkProcessor.startProcessing();
+        try {
+            LinkProcessor linkProcessor = new LinkProcessor(url, indexUtils, count);
+            linkProcessor.startProcessing();
 
-        indexUtils.closeWriter();
+            indexUtils.closeWriter();
 
-        link_section_error_label.setText("Done");
+            link_section_error_label.setText("Done");
+        } catch (NotSupportedShopException e) {
+            link_section_error_label.setText("Unsupported shop");
+        }
     }
 
     private void queryButtonClick() {
@@ -77,7 +83,7 @@ public class MainGUI {
         } catch (ParseException e) {
             result_pane.setText("Error while parsing query");
         } catch (NotFoundException e) {
-            result_pane.setText("No text found with specified text");
+            result_pane.setText("No product found");
         }
     }
 

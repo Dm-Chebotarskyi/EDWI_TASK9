@@ -6,15 +6,15 @@ import org.jsoup.select.Elements;
 
 import java.util.List;
 
-public class MediaExpertPageAnalyzer implements PageAnalyzer {
+public class XKomPageAnalyzer implements PageAnalyzer {
 
-    final static String MEDIAEXPERT_ROOT = "mediaexpert.pl";
-    final static String SPEC = "laptopy";
+    final static String XKOM_ROOT = "x-kom.pl";
+    final static String SPEC = "laptopy-notebooki-ultrabooki";
 
     @Override
     public List<AnalyzerResult> analyze(Element body) {
 
-        Elements productRows = body.getElementsByClass("m-product");
+        Elements productRows = body.getElementsByClass("product-item");
 
         List<AnalyzerResult> analyzerResults = Lists.newArrayList();
 
@@ -24,29 +24,31 @@ public class MediaExpertPageAnalyzer implements PageAnalyzer {
 
 
         for (Element productRow : productRows) {
+            Element productSales = productRow.getElementsByClass("product-item").first();
 
-            Element productHeader = productRow.getElementsByClass("js-gtmEvent_click").first();
+            Element productHeader = productRow.getElementsByClass("name").first();
             if (productHeader == null)
                 continue;
             String title = productHeader.text();
-            String url = MEDIAEXPERT_ROOT + productHeader.attr("href");
-            Element priceStringElement = productRow.getElementsByClass("price_txt").first();
+            String url = XKOM_ROOT + productHeader.attr("href");
+            Element priceStringElement = productSales.getElementsByClass("price").first();
             if (priceStringElement == null)
                 continue;
 
             String priceString = priceStringElement.text();
 
-            String availability = productRow.getElementsByClass("js-delivery_trigger").isEmpty() ?
+            String availability = productSales.getElementsByClass("js-add-to-cart").isEmpty() ?
                     "Nie dostępny" :
                     "Dostępny";
 
             try {
-                int length = priceString.length();
-                double price = Double.parseDouble(priceString.substring(0, length - 2) + "." + priceString.substring(length-2, priceString.length()));
+
+                double price = Double.parseDouble(priceString.replace(",", ".").replaceAll("[zł/ ]", ""));
                 if (!title.isEmpty() && !url.isEmpty())
                     analyzerResults.add(ImmutableAnalyzerResult.of(title, url, price, availability));
-            } catch (NumberFormatException ignored) {
+            } catch (NumberFormatException e) {
             }
+
         }
 
         return analyzerResults;
@@ -54,7 +56,7 @@ public class MediaExpertPageAnalyzer implements PageAnalyzer {
 
     @Override
     public String getRoot() {
-        return MEDIAEXPERT_ROOT;
+        return XKOM_ROOT;
     }
 
     @Override

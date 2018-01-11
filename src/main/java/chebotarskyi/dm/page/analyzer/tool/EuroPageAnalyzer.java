@@ -37,10 +37,14 @@ public class EuroPageAnalyzer implements PageAnalyzer {
 
             String priceString = priceStringElement.text();
 
+            String availability = productRow.getElementsByClass("shop-delivery-action").isEmpty() ?
+                    "Nie dostępny" :
+                    "Dostępny";
+
             try {
                 double price = Double.parseDouble(priceString.replaceAll("[zł/ ]", ""));
                 if (!title.isEmpty() && !url.isEmpty())
-                    analyzerResults.add(ImmutableAnalyzerResult.of(title, url, price));
+                    analyzerResults.add(ImmutableAnalyzerResult.of(title, url, price, availability));
             } catch (NumberFormatException e) {
             }
         }

@@ -33,7 +33,7 @@ public class IndexUtils {
         return w;
     }
 
-    public void addDoc(String title, String url, double price) throws IOException {
+    public void addDoc(String title, String url, double price, String availability) throws IOException {
 
         if (!Deduplicator.isOk(title))
             return;
@@ -42,6 +42,7 @@ public class IndexUtils {
         doc.add(new TextField("title", title, Field.Store.YES));
         doc.add(new StringField("url", url, Field.Store.YES));
         doc.add(new StringField("price", String.valueOf(price), Field.Store.YES));
+        doc.add(new StringField("availability", availability, Field.Store.YES));
         w.get().addDocument(doc);
     }
 

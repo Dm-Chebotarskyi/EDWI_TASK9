@@ -1,5 +1,6 @@
 package chebotarskyi.dm;
 
+import chebotarskyi.dm.exception.NotFoundException;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
@@ -15,7 +16,6 @@ import org.apache.lucene.store.FSDirectory;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,7 +66,7 @@ public class QueryProcessor {
 
             documentList.sort(new DocsComparator());
 
-            for (int i=0; i<documentList.size(); ++i) {
+            for (int i=0; i<documentList.size() && i < 3; ++i) {
                 builder.append(String.valueOf(i + 1))
                         .append(".\t")
                         .append(documentList.get(i).get("title"))
@@ -74,6 +74,8 @@ public class QueryProcessor {
                         .append(documentList.get(i).get("price"))
                         .append("\n\t")
                         .append(documentList.get(i).get("url"))
+                        .append("\n\t")
+                        .append(documentList.get(i).get("availability"))
                         .append("\n\n-----------------------------------\n");
             }
         } catch (IOException e){

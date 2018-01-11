@@ -13,4 +13,7 @@ public interface AnalyzerResult {
 
     @Value.Parameter
     double price();
+
+    @Value.Parameter
+    String availibility();
 }

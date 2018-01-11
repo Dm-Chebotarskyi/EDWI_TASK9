@@ -109,7 +109,7 @@
             </constraints>
             <properties>
               <font size="20"/>
-              <text value="10"/>
+              <text value="1000"/>
             </properties>
           </component>
           <component id="dd24f" class="javax.swing.JLabel" binding="link_section_error_label">
